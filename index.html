@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Portifolio</title>
+    <style>
+        body    {
+                    height: 900vh;
+                    background-color: #202020;
+                }
+        
+                    
+        nav.menu-lateral    {
+                                width: 100px;
+                                height: 100%;
+                                background-color: #202020;
+                                padding: 40px 0 40px 1%;
+                                box-shadow: 3.5px 0 0 #DC143C;
+
+                                position: fixed;
+                                top: 0;
+                                left: -35px;
+                                overflow: hidden;
+                                transition: .3s;
+                            }
+
+        nav.menu-lateral.expandir   {
+                                        width: 240px;
+                                    }
+
+        .btn-expandir   {
+                            width: 100%;
+                            padding-left: 50px;
+                        }
+
+        .btn-expandir > i   {
+                                color: #fff;
+                                font-size: 30px;
+                                cursor: pointer;
+                            }
+
+        ul  {
+                height: 100%;
+                list-style-type: none;
+            }
+
+            ul li.item-menu {
+                                transition: .5s;
+                            }
+
+            ul li.ativo {
+                            background-color: #DC143C;
+                        }
+
+            ul li.item-menu:hover   {
+                                        background: #DC143C;
+                                    }
+        
+            ul li.item-menu a   {
+                                    color: #fff;
+                                    text-decoration: none;
+                                    font-size: 20px;
+                                    padding: 20px 4%;
+                                    display: flex;
+                                    margin-bottom: 20px;
+                                    line-height: 40px;
+                                }
+
+            ul li.item-menu a .txt-link {
+                                            margin-left: 70px;
+                                            transition: .6s;
+                                            opacity: 0;
+                                        }
+
+            nav.menu-lateral.expandir .txt-link {
+                                                    margin-left: 40px;
+                                                    opacity: 1;
+                                                }
+
+            ul li.item-menu a .icon > i {
+                                            font-size: 30px;
+                                            margin-left: 10px;
+                                        }
+
+            .itela  {
+                        height: 900vh;
+                        margin-left: 70px;
+                    }
+
+            iframe  {
+                        border: none;
+                        background-color: #202020;
+                    }
+    </style>
+</head>
+<body>
+    <div id="principal" class="principal">
+        
+        <nav class="menu-lateral">
+
+            <div class="btn-expandir">
+                <i class="bi bi-list-ul" id="btn-exp"></i>
+            </div>
+            <ul>
+                <li class="item-menu ativo">
+                    <a href="./pagina/perfil.html" target="tela">
+                        <span class="icon"><i class="bi bi-person-circle"></i></span>
+                        <span class="txt-link">Perfil</span>
+                    </a>
+                </li>
+                <li class="item-menu">
+                    <a href="./pagina/trabalhos.html" target="tela">
+                        <span class="icon"><i class="bi bi-archive"></i></span>
+                        <span class="txt-link">Projetos</span>
+                    </a>
+                </li>
+                <li class="item-menu">
+                    <a href="./pagina/perfil.html" target="tela">
+                        <span class="icon"><i class="bi bi-card-heading"></i></span>
+                        <span class="txt-link">Disciplinas</span>
+                    </a>
+                </li>
+                <li class="item-menu">
+                    <a href="./pagina/perfil.html" target="tela">
+                        <span class="icon"><i class="bi bi-card-checklist"></i></span>
+                        <span class="txt-link">Concluidos</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="itela">
+            <iframe src="/default"  name="tela" width="100%" height="100%"></iframe>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var menuItem = document.querySelectorAll('.item-menu');
+            var btnExp = document.querySelector('#btn-exp');
+            var menuSide = document.querySelector('.menu-lateral');
+            var iframe = document.querySelector('iframe');
+    
+            // Função para selecionar um item do menu
+            function selectLink() {
+                menuItem.forEach((item) => item.classList.remove('ativo'));
+                this.classList.add('ativo');
+                // Atualiza a URL da iframe com base no href do link
+                iframe.src = this.querySelector('a').getAttribute('href');
+
+                menuSide.classList.remove('expandir');
+            }
+    
+            // Adiciona o evento de clique a todos os itens do menu
+            menuItem.forEach((item) => item.addEventListener('click', selectLink));
+    
+            // Verifique se há um item de menu ativo inicial e defina a URL da iframe de acordo
+            var itemAtivoInicial = document.querySelector('.item-menu.ativo');
+            if (itemAtivoInicial) {
+                iframe.src = itemAtivoInicial.querySelector('a').getAttribute('href');
+            }
+    
+            btnExp.addEventListener('click', function() {
+                menuSide.classList.toggle('expandir');
+            });
+        });
+    </script>
+</body>
+</html>
